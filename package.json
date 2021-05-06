@@ -1,0 +1,10 @@
+{
+  "name": "instaclone",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/zue-dev/instaclone-backend.git",
+  "license": "MIT",
+  "scripts": {
+    "dev": ""
+  }
+}
