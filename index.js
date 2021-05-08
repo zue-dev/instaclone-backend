@@ -1,3 +1,4 @@
+require("dotenv").config();
 import { ApolloServer, gql } from "apollo-server";
 
 const books = [
@@ -30,6 +31,8 @@ const resolvers = {
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
+const PORT = process.env.PORT;
+
+server.listen(PORT).then(({ url }) => {
+  console.log(`🚀  Server ready at ${url} and PORT is ${PORT}`);
 });
