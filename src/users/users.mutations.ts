@@ -1,19 +1,13 @@
 import client from "../client";
 import bcrypt from "bcrypt";
-
-interface UserModel {
-  firstName: string;
-  lastName: string;
-  userName: string;
-  email: string;
-  password: string;
-}
+import jwt from "jsonwebtoken";
+import { CreateAccountParams, LoginParams, LoginResult } from "../types/user";
 
 export default {
   Mutation: {
     createAccount: async (
       _: any,
-      { firstName, lastName, userName, email, password }: UserModel
+      { firstName, lastName, userName, email, password }: CreateAccountParams
     ) => {
       /**
        * check if username or email are already on DB
@@ -45,6 +39,41 @@ export default {
       } catch (e) {
         return e;
       }
+    },
+    login: async (
+      _: any,
+      { userName, password }: LoginParams
+    ): Promise<LoginResult> => {
+      /**
+       * find user with args.userName
+       * check password with args.password
+       * issue a token and send it to the user
+       */
+      const user = await client.user.findFirst({ where: { userName } });
+      if (!user) {
+        return {
+          ok: false,
+          error: "user not found",
+        };
+      }
+
+      const correctPassword = await bcrypt.compare(password, user.password);
+      if (!correctPassword) {
+        return {
+          ok: false,
+          error: "incorrect password",
+        };
+      }
+
+      const token = await jwt.sign(
+        { id: user.id },
+        process.env.SECRET_KEY as string
+      );
+
+      return {
+        ok: true,
+        token,
+      };
     },
   },
 };
