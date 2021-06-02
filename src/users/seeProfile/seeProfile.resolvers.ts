@@ -1,13 +1,15 @@
-import client from "../../client";
+import { Resolvers } from "../../type";
 
 interface SeeProfileParams {
   userName: string;
 }
 
-export default {
+const resolvers: Resolvers = {
   Query: {
-    seeProfile: (_: any, { userName }: SeeProfileParams) => {
+    seeProfile: (_, { userName }, { client }) => {
       return client.user.findUnique({ where: { userName } });
     },
   },
 };
+
+export default resolvers;

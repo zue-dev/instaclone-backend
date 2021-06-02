@@ -18,11 +18,13 @@ export interface LoginResult {
 }
 
 export interface EditProfileParams {
-  firstName: string;
-  lastName: string;
-  userName: string;
-  email: string;
-  password: string;
+  firstName?: string;
+  lastName?: string;
+  userName?: string;
+  email?: string;
+  password?: string;
+  bio?: string;
+  avatar: string;
 }
 
 export interface EditProfileResult {
