@@ -117,3 +117,5 @@ dist
 
 
 prisma/migrations
+
+uploads
