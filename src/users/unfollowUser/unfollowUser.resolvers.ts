@@ -17,7 +17,11 @@ export default {
 
         await client.user.update({
           where: { id: loggedInUser?.id },
-          data: { following: { disconnect: { userName } } },
+          data: {
+            following: {
+              disconnect: { userName },
+            },
+          },
         });
 
         return {

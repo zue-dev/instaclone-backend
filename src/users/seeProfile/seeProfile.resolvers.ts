@@ -7,7 +7,13 @@ interface SeeProfileParams {
 const resolvers: Resolvers = {
   Query: {
     seeProfile: (_, { userName }, { client }) => {
-      return client.user.findUnique({ where: { userName } });
+      return client.user.findUnique({
+        where: { userName },
+        include: {
+          following: true,
+          followers: true,
+        },
+      });
     },
   },
 };
