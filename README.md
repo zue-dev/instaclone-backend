@@ -18,6 +18,7 @@ Instaclone Backend
 
 ## Photos
 
+- [x] Upload Photo (parse #)
 - [ ] See photo
 - [ ] Upload photo
 - [ ] Edit photo
