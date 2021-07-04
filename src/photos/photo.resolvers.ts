@@ -1,4 +1,4 @@
-import { Photo } from "@prisma/client";
+import { Hashtag, Photo } from "@prisma/client";
 import client from "../client";
 
 export default {
@@ -7,6 +7,20 @@ export default {
         hashtags: ({ id }: Photo) => client.hashtag.findMany({
             where: {
                 photos: { some: { id } }
+            }
+        })
+    },
+    Hashtag: {
+        photos: ({ id }: Hashtag, { page }: { page: number }) => {
+            return client.hashtag.findUnique({
+                where: { id }
+            }).photos();
+        },
+        totalPhotos: ({ id }: Hashtag) => client.photo.count({
+            where: {
+                hashtags: {
+                    some: { id }
+                }
             }
         })
     }
