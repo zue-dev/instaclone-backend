@@ -32,3 +32,7 @@ Instaclone Backend
 - [ ] Comment on Photo
 - [ ] Edit Comment
 - [ ] Delete Comment
+
+## Extras
+
+- [ ] S3 Image Upload
